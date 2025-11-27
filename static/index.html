@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>AI Capstone – Land Classification</title>
+  <link rel="stylesheet" href="/static/styles.css" />
+</head>
+<body>
+  <header class="header">
+    <div class="container">
+      <h1>AI Capstone – Land Classification</h1>
+      <p>Upload a satellite image and classify it as agricultural or non‑agricultural land.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="card">
+      <h2>Try the Model</h2>
+      <p class="model-tagline">
+        Using a Vision Transformer (Keras, CPU‑optimized) on Render’s free tier.
+      </p>
+
+      <form id="upload-form">
+        <div class="model-select">
+          Model: <strong>Keras ViT land‑classification head</strong>
+        </div>
+
+        <label class="file-label">
+          <span>Select an image</span>
+          <input type="file" id="file-input" accept="image/*" required />
+        </label>
+
+        <button type="submit" id="submit-btn">Predict</button>
+      </form>
+
+      <div id="preview" class="preview hidden">
+        <h3>Preview</h3>
+        <img id="preview-img" alt="Preview" />
+      </div>
+
+      <div id="result" class="result hidden">
+        <h3>Prediction</h3>
+        <p id="prediction-text"></p>
+        <div class="prob-bar">
+          <div id="prob-agri-bar" class="prob-fill"></div>
+        </div>
+        <p id="prob-details"></p>
+      </div>
+
+      <div id="error" class="error hidden"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <small>Powered by Keras ViT • FastAPI</small>
+    </div>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>
