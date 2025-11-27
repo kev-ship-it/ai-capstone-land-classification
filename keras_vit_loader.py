@@ -92,8 +92,12 @@ _model = None
 def _ensure_model_file():
     """Download the model from Google Drive if it's not present locally."""
     if not os.path.exists(MODEL_PATH):
+        print(f"Model file missing, downloading from {MODEL_URL}...")
         os.makedirs(os.path.dirname(MODEL_PATH) or ".", exist_ok=True)
         urllib.request.urlretrieve(MODEL_URL, MODEL_PATH)
+        print("Model download complete.")
+    else:
+        print("Model file already present.")
 
 
 def load_keras_vit():
@@ -110,7 +114,7 @@ def load_keras_vit():
     return _model
 
 
-def preprocess_keras_image(file_obj) -> np.ndarray:
+def preprocess_keras_image(file_obj) -> Tuple:
     img = Image.open(file_obj).convert("RGB")
     img = img.resize((IMG_SIZE, IMG_SIZE))
     arr = np.asarray(img, dtype="float32") / 255.0
@@ -125,3 +129,4 @@ def predict_keras_vit(file_obj) -> Tuple[float, str]:
     p_agri = float(preds[0]) if getattr(preds, "shape", None) else float(preds)
     label = "agri" if p_agri >= 0.5 else "non-agri"
     return p_agri, label
+
